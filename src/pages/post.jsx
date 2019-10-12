@@ -8,8 +8,8 @@ export default class post extends React.Component{
 	constructor(props){
         super(props);
         this.state = {
-        	class_: 'EECS 281',
-        	location: 'North Campus',
+        	class_: '',
+        	location: '',
         	time: 1,
         	joinSet: true,
         	numberOfPeople: 1
@@ -42,6 +42,7 @@ export default class post extends React.Component{
 				Class
 				<br />
 				<select name = "class_" value={this.state.class_} onChange={this.handleChange}>
+					<option value="">Select Class</option>
 					<option value="EECS 281">EECS 281</option>
 					<option value="AEROSP 343">AEROSP 343</option>
 					<option value="ECON 101">ECON 101</option>
@@ -53,6 +54,7 @@ export default class post extends React.Component{
 				Location
 				<br />
 				<select name = "location" value={this.state.location} onChange={this.handleChange}>
+					<option value="">Select Location</option>
 					<option value="North Campus">North Campus - Dudestadt Center</option>
 					<option value="Central Campus">Central Campus - UgLi</option>
 					<option value="South Campus">South Campus - Big House</option>
