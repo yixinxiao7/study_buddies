@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# insta485run
+#
+# stop on errors
+set -Eeuo pipefail
+
+#install all dependencies
+npm install react-bootstrap bootstrap
+npm install --save react-router-dom
