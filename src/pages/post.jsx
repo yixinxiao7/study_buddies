@@ -24,6 +24,10 @@ export default class post extends React.Component{
         this.handleJoinSetChange = this.handleJoinSetChange.bind(this);
         this.handlePeopleChange = this.handlePeopleChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+<<<<<<< HEAD
+        // this.handleSubmit = this.handleSubmit.bind(this);
+=======
+>>>>>>> 488009edbb92903255aab3fc4e3b983dfad33e29
         this.postHandle = this.postHandle.bind(this);
     }
     handleClassChange(event){
@@ -64,7 +68,7 @@ export default class post extends React.Component{
     // }
 
 	async postHandle(_firstname, _lastName, _class_, _location, _time, _description, _numberOfPeople, _joinSet){
-		const url = '/sessioninfo/';
+		const url = 'http://127.0.0.1:8000/sessioninfo/';
 		const data = { firstName: _firstname,
 					   lastName: _lastName,
 					   class_: _class_,
@@ -72,6 +76,7 @@ export default class post extends React.Component{
 					   description:_description,
 					   numberOfPeople:_numberOfPeople,
 					   joinSet: _joinSet,
+					   location: _location,
 					 };
 		try {
 		    const response = await fetch(url, {
