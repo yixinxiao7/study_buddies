@@ -8,11 +8,14 @@ export default class post extends React.Component{
 	constructor(props){
         super(props);
         this.state = {
+        	firstName: 'Hello',
+        	lastName: 'World',
         	class_: '',
         	location: '',
+        	description: '',
         	time: 1,
         	joinSet: true,
-        	numberOfPeople: 1
+        	numberOfPeople: 1,
         };
 
         this.handleClassChange = this.handleClassChange.bind(this);
@@ -20,7 +23,9 @@ export default class post extends React.Component{
         this.handleTimeChange = this.handleTimeChange.bind(this);
         this.handleJoinSetChange = this.handleJoinSetChange.bind(this);
         this.handlePeopleChange = this.handlePeopleChange.bind(this);
+        this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.postHandle = this.postHandle.bind(this);
     }
     handleClassChange(event){
     	console.log(event.target.value);
@@ -48,20 +53,47 @@ export default class post extends React.Component{
             numberOfPeople: event.target.value,
         });
     }
-
-
-    handleSubmit(event){
-        event.preventDefault();
-
-        this.props.history.push('/post-success');
+    handleDescriptionChange(event){
+    	this.setState({
+            description: event.target.value,
+        });
     }
 
+    // handleSubmit(event){
+    //     event.preventDefault();
+    //     this.props.history.push('/post-success');
+    // }
+
+	async postHandle(_firstname, _lastName, _class_, _location, _time, _description, _numberOfPeople, _joinSet){
+		const url = '/sessioninfo/';
+		const data = { firstName: _firstname,
+					   lastName: _lastName,
+					   class_: _class_,
+					   time: _time,
+					   description:_description,
+					   numberOfPeople:_numberOfPeople,
+					   joinSet: _joinSet,
+					 };
+		try {
+		    const response = await fetch(url, {
+			    method: 'POST', // or 'PUT'
+			    body: JSON.stringify(data), // data can be `string` or {object}!
+			    headers: {
+			      	'Content-Type': 'application/json'
+			    }
+		  	});
+	    const json = await response.json();
+		console.log('Success:', JSON.stringify(json));
+		} catch (error) {
+			console.error('Error:', error);
+		} 
+	}
 
 	renderEntry(){ // Maybe be a dropdown box too
 		return( // Try linking it with a Map service?
 				// How to dim the placeholder
 			<div> 
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={this.postHandle(this.state.firstName, this.state.lastName, this.state.class_, this.state.location, this.state.time, this.state.description, this.state.numberOfPeople, this.state.joinSet)}>
 				<label>
 				Class
 				<br />
@@ -93,6 +125,12 @@ export default class post extends React.Component{
 				</label>
 				<br />	
 				<label>
+				Description
+				<br />
+					<input name = "description" type="text" value={this.state.description} onChange={this.handleDescriptionChange} required/>
+				</label>
+				<br />
+				<label>
 				Number of people
 				<br />
 				<input name = "numberOfPeople" type="number" min="1" max="100" value={this.state.numberOfPeople} onChange={this.handlePeopleChange} required/>
@@ -102,12 +140,13 @@ export default class post extends React.Component{
 				Private?
 					<input name="joinSet" type="checkbox" value={this.state.joinSet} onChange={this.handleJoinSetChange} />
 				</label>
+				<input type="hidden" id="firstName" value="Hello" />
+				<input type="hidden" id="lastName" value="World" />
 					<Button variant="outline-dark" input type="submit" size="lg" block> Post </Button>
 				</form>
 			</div>
 		);
-	}
-
+}
 	render(){
 		return(
 			<Container>
@@ -118,3 +157,5 @@ export default class post extends React.Component{
 			);
 	}
 }
+
+

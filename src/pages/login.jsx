@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Row, Col, Container, Button} from 'react-bootstrap';
 
 
-
 export default class Login extends React.Component{
     constructor(props){
         super(props);
@@ -49,7 +48,7 @@ export default class Login extends React.Component{
                 <br />
                 <label>
                 Password:
-                    <input name="password" type="text" value={this.state.password} onChange={this.handlePasswordChange} required/>
+                    <input name="password" type="password" value={this.state.password} onChange={this.handlePasswordChange} required/>
                 </label>
                     <Button variant="primary" input type="submit" value="Submit" size="sm">Log in</Button>
                 </form>
