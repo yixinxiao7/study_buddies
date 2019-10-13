@@ -15,23 +15,47 @@ export default class post extends React.Component{
         	numberOfPeople: 1
         };
 
-        this.handleChange = this.handleChange.bind(this);
+        this.handleClassChange = this.handleClassChange.bind(this);
+        this.handLocationChange = this.handleLocationChange.bind(this);
+        this.handleTimeChange = this.handleTimeChange.bind(this);
+        this.handleJoinSetChange = this.handleJoinSetChange.bind(this);
+        this.handlePeopleChange = this.handlePeopleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleChange(event){
+    handleClassChange(event){
+    	console.log(event.target.value);
     	  this.setState({
-    	  	class_: event.target.class_,
-            location: event.target.location,
-            time: event.target.time,
-            joinSet: event.target.joinSet,
-            numberOfPeople: event.target.numberOfPeople,
+    	  	class_: event.target.value, 
         });
     }
+    handleLocationChange(event){
+    	this.setState({
+            location: event.target.value,
+        });
+    }
+    handleTimeChange(event){
+    	this.setState({
+            time: event.target.value,
+        });
+    }
+    handleJoinSetChange(event){
+    	this.setState({
+            joinSet: event.target.value,
+        });
+    }
+    handlePeopleChange(event){
+    	this.setState({
+            numberOfPeople: event.target.value,
+        });
+    }
+
+
     handleSubmit(event){
         event.preventDefault();
 
         this.props.history.push('/post-success');
     }
+
 
 	renderEntry(){ // Maybe be a dropdown box too
 		return( // Try linking it with a Map service?
@@ -41,7 +65,7 @@ export default class post extends React.Component{
 				<label>
 				Class
 				<br />
-				<select name = "class_" value={this.state.class_} onChange={this.handleChange}>
+				<select name = "class_" value={this.state.class_} onChange={this.handleClassChange}>
 					<option value="">Select Class</option>
 					<option value="EECS 281">EECS 281</option>
 					<option value="AEROSP 343">AEROSP 343</option>
@@ -53,7 +77,7 @@ export default class post extends React.Component{
 				<label>
 				Location
 				<br />
-				<select name = "location" value={this.state.location} onChange={this.handleChange}>
+				<select name = "location" value={this.state.location} onChange={this.handleLocationChange}>
 					<option value="">Select Location</option>
 					<option value="North Campus">North Campus - Dudestadt Center</option>
 					<option value="Central Campus">Central Campus - UgLi</option>
@@ -65,18 +89,18 @@ export default class post extends React.Component{
 				<label>
 				Duration(hr)
 				<br />
-					<input name = "time" type="number" min="1" max="24" step="0.5" value={this.state.time} onChange={this.handleChange} required/>
+					<input name = "time" type="number" min="1" max="24" step="0.5" value={this.state.time} onChange={this.handleTimeChange} required/>
 				</label>
 				<br />	
 				<label>
 				Number of people
 				<br />
-				<input name = "numberOfPeople" type="number" min="1" max="100" value={this.state.numberOfPeople} onChange={this.handleChange} required/>
+				<input name = "numberOfPeople" type="number" min="1" max="100" value={this.state.numberOfPeople} onChange={this.handlePeopleChange} required/>
 				</label>
 				<br />
 				<label>
 				Private?
-					<input name="joinSet" type="checkbox" value={this.state.joinSet} onChange={this.handleChange} />
+					<input name="joinSet" type="checkbox" value={this.state.joinSet} onChange={this.handleJoinSetChange} />
 				</label>
 					<Button variant="outline-dark" input type="submit" size="lg" block> Post </Button>
 				</form>
