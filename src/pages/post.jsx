@@ -19,12 +19,11 @@ export default class post extends React.Component{
         };
 
         this.handleClassChange = this.handleClassChange.bind(this);
-        this.handLocationChange = this.handleLocationChange.bind(this);
+        this.handleLocationChange = this.handleLocationChange.bind(this);
         this.handleTimeChange = this.handleTimeChange.bind(this);
         this.handleJoinSetChange = this.handleJoinSetChange.bind(this);
         this.handlePeopleChange = this.handlePeopleChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.postHandle = this.postHandle.bind(this);
     }
     handleClassChange(event){
